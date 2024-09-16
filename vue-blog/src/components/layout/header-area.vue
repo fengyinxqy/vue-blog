@@ -4,7 +4,7 @@
       v-if="!isLogin"
       text
       type="primary"
-      @click="handleLogin"
+      @click="handleClickLogin"
     >
       登录
     </el-button>
@@ -19,20 +19,26 @@
         </el-dropdown-menu>
       </template>
     </el-dropdown>
+    <login-dialog
+      v-if="loginDialogVisible"
+      @closed="loginDialogVisible=false"
+    />
   </el-header>
 </template>
 
 <script setup>
+import LoginDialog from '../login-dialog.vue';
 import { ref } from 'vue'
 
 const isLogin = ref(false)
+const loginDialogVisible = ref(false)
 const state = ref({
   circleUrl:
     'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
 })
 
-const handleLogin = () => {
-
+const handleClickLogin = () => {
+  loginDialogVisible.value = true
 }
 </script>
 

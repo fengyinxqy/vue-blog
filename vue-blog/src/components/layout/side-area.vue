@@ -64,4 +64,8 @@ const handleClose = (key, keyPath) => {
 .logo{
   font-size: 50px;
 }
+
+.el-menu{
+  border: none;
+}
 </style>

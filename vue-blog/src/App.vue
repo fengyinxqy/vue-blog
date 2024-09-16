@@ -8,11 +8,11 @@ import FooterArea from '@/components/layout/footer-area.vue'
 <template>
   <div class="common-layout">
     <el-container>
-      <SideArea />
+      <side-area />
       <el-container direction="vertical">
-        <HeaderArea />
+        <header-area />
         <el-main><RouterView /></el-main>
-        <FooterArea />
+        <footer-area />
       </el-container>
     </el-container>
   </div>
