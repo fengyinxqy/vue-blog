@@ -29,8 +29,11 @@
 <script setup>
 import LoginDialog from '../login-dialog.vue';
 import { ref } from 'vue'
+import { useUserStore } from '@/stores/user';
 
-const isLogin = ref(false)
+const userStore = useUserStore()
+
+const isLogin = ref(!!userStore.userInfo.id)
 const loginDialogVisible = ref(false)
 const state = ref({
   circleUrl:

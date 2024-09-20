@@ -16,10 +16,10 @@
     >
       <el-form-item
         label="用户名:"
-        prop="name"
+        prop="username"
       >
         <el-input
-          v-model="form.name"
+          v-model="form.username"
           class="item-input"
         />
       </el-form-item>
@@ -52,6 +52,10 @@
 
 <script setup>
 import { ref } from 'vue';
+import axios from '@/utils/axios'
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore()
 
 defineEmits(['closed'])
 const dialogFormVisible = ref(true)
@@ -60,7 +64,7 @@ const formLabelWidth = '80px'
 const loginForm = ref()
 
 const loginFormRules = ref({
-  name: [
+  username: [
     { required: true, message: '请输入用户名', trigger: 'blur' }
   ],
   password: [
@@ -69,7 +73,7 @@ const loginFormRules = ref({
 })
 
 const form = ref({
-  name: '',
+  username: '',
   password: ''
 })
 
@@ -78,9 +82,10 @@ const submitForm= (formRef) => {
   formRef.validate((valid)=>{
     if(valid){
       // 登录逻辑
-      dialogFormVisible.value = false
-      form.value.name = ''
-      form.value.password = ''
+      axios.post('/user/login',form.value).then((res)=>{
+        userStore.setUserInfo(res.data)
+        dialogFormVisible.value = false
+      })
     }
   })
 }
